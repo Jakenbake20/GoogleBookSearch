@@ -33,3 +33,19 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err))
     },
+    update: (req, res) => {
+        db.Book
+            .findByIdAndUpdate({ _id: req.params.id }, req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err))
+    },
+    // used to delete a book from the db
+    remove: (req, res) => {
+        db.Book
+            .findById({ _id: req.params.id })
+            .then(dbModel => dbModel.remove())
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err))
+    },
+
+};
